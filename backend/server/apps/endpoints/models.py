@@ -23,7 +23,7 @@ class MLAlgorithmStatus(models.Model):
     active = models.BooleanField()
     created_by = models.CharField(max_length=128)
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
-    parent_mlalgorithm = models.ForeignKey(MLAlgorithm, on_delete=models.CASCADE, related_name
+    parent_mlalgorithm = models.ForeignKey(MLAlgorithm, on_delete=models.CASCADE, related_name = "status")
     
 class MLRequest(models.Model):
 # keeps information about all requests to ML algorithms
