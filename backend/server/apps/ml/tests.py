@@ -5,7 +5,6 @@ from apps.ml.rain_classifier.svc import SVC
 class MLTests(TestCase):
     def test_svc_algorithm(self):
         input_data = {
-            "day": 1,
             "pressure": 1025.9,
             "maxtemp": 19.9,
             "temperature": 18.3,
