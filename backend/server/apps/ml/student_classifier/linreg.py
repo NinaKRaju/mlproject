@@ -1,10 +1,10 @@
 import joblib
 import pandas as pd
 
-class SVC:
+class LinearRegression:
     def __init__(self):
         path_to_artifacts = "../../research/"
-        self.model = joblib.load(path_to_artifacts + "svc.joblib")
+        self.model = joblib.load(path_to_artifacts + "linear_reg.joblib")
     
     def preprocessing(self, input_data):
         input_data = pd.DataFrame(input_data, index=[0])
@@ -14,10 +14,8 @@ class SVC:
         return self.model.predict_proba(input_data)
 
     def postprocessing(self, input_data):
-        label = "Rain"
-        if input_data[8] == "no":
-            label = "No rain"
-        return {"probability": input_data[8], "label": label, "status": "OK"}
+        output = input_data[32]
+        return {"prediction": output, "status": "OK"}
     
     def compute_prediction(self, input_data):
         try:

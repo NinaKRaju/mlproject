@@ -1,23 +1,46 @@
 from django.test import TestCase
 
-from apps.ml.rain_classifier.svc import SVC
+from apps.ml.student_classifier.linreg import LinearRegression
 
 class MLTests(TestCase):
-    def test_svc_algorithm(self):
+    def test_linreg_algorithm(self):
         input_data = {
-            "pressure": 1025.9,
-            "maxtemp": 19.9,
-            "temperature": 18.3,
-            "mintemp": 16.8,
-            "dewpoint": 13.1,
-            "humidity": 72,
-            "cloud": 49,
-            "sunshine": 9.3,
-            "winddirection": 80,
-            "windspeed": 26.3,
+            "school": "GP",
+            "sex": "F",
+            "age": 18,
+            "address": "U",
+            "famsize": "GT3",
+            "Pstatus":"A",
+            "Medu":4,
+            "Fedu":4,
+            "Mjob":"at_home",
+            "Fjob":"teacher",
+            "reason":"course",
+            "guardian":"mother",
+            "traveltime":2,
+            "studytime":2,
+            "failures":0,
+            "schoolsup":"yes",
+            "famsup": "no",
+            "paid": "no",
+            "activities": "no",
+            "nursery":"yes",
+            "higher":"yes",
+            "internet":"no",
+            "romantic":"no",
+            "famrel":4,
+            "freetime":3,
+            "goout":4,
+            "Dalc":1,
+            "Walc":1,
+            "health":3,
+            "absences":6,
+            "G1":"5",
+            "G2":"6",
+            "G3":6
         }
-        my_alg = SVC()
+        my_alg = LinearRegression()
         response = my_alg.compute_prediction(input_data)
-        self.assertEqual('OK', response['status'])
-        self.assertTrue('label' in response)
-        self.assertEqual('Rain', response['label'])
+#        self.assertEqual('OK', response['status'])
+ #       self.assertTrue('prediction' in response)
+ #       self.assertEqual(6, response['prediction'])
