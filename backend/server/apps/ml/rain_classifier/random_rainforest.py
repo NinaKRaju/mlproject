@@ -13,7 +13,7 @@ class RandomForestClassifier:
         # fill missing values
         for col in input_data.columns:
             if input_data[col].isnull().sum() > 0:
-                val = df[col].mean()
+                val = input_data[col].mean()
                 input_data[col] = input_data[col].fillna(val)
         return input_data
 
@@ -22,9 +22,9 @@ class RandomForestClassifier:
 
     def postprocessing(self, input_data):
         label = "yes"
-        if input_data[8] == "no":
+        if input_data[1] > 0.5:
             label = "no"
-        return {"probability": input_data[8], "label": label, "status": "OK"}
+        return {"probability": input_data[1], "label": label, "status": "OK"}
 
     def compute_prediction(self, input_data):
         try:
