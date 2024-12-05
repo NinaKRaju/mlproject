@@ -1,5 +1,4 @@
 from django.test import TestCase
-
 from apps.ml.income_classifier.random_forest import RandomForestClassifier
 import inspect
 from apps.ml.registry import MLRegistry
@@ -27,7 +26,8 @@ class MLTests(TestCase):
         self.assertEqual('OK', response['status'])
         self.assertTrue('label' in response)
         self.assertEqual('<=50K', response['label'])
-        
+
+    print(input_data)
     def test_registry(self):
         registry = MLRegistry()
         self.assertEqual(len(registry.endpoints), 0)

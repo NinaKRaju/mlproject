@@ -1,29 +1,35 @@
-# file backend/server/apps/ml/income_classifier/random_forest.py
+# file backend/server/apps/ml/student_classifier/linear_reg.py
 import joblib
 import pandas as pd
 
-class RandomForestClassifier:
+class LinearRegression:
     def __init__(self):
         path_to_artifacts = "../../research/"
-        self.values_fill_missing =  joblib.load(path_to_artifacts + "train_mode.joblib")
-        self.encoders = joblib.load(path_to_artifacts + "encoders.joblib")
-        self.model = joblib.load(path_to_artifacts + "random_forest.joblib")
+        self.encoders = joblib.load(path_to_artifacts + "encoders_lin2.joblib")
+        self.model = joblib.load(path_to_artifacts + "linear_reg2.joblib")
 
     def preprocessing(self, input_data):
         # JSON to pandas DataFrame
         input_data = pd.DataFrame(input_data, index=[0])
-        # fill missing values
-        input_data.fillna(self.values_fill_missing)
         # convert categoricals
         for column in [
-            "workclass",
-            "education",
-            "marital-status",
-            "occupation",
-            "relationship",
-            "race",
+            "school",
             "sex",
-            "native-country",
+            "address",
+            "famsize",
+            "Pstatus",
+            "Mjob",
+            "Fjob",
+            "reason",
+            "guardian",
+            "schoolsup",
+            "famsup",
+            "paid",
+            "activities",
+            "nursery",
+            "higher",
+            "internet",
+            "romantic",
         ]:
             categorical_convert = self.encoders[column]
             input_data[column] = categorical_convert.transform(input_data[column])
@@ -34,9 +40,9 @@ class RandomForestClassifier:
         return self.model.predict_proba(input_data)
 
     def postprocessing(self, input_data):
-        label = "<=50K"
-        if input_data[1] > 0.5:
-            label = ">50K"
+        label = "fail"
+        if input_data[1] > 13:
+            label = "pass"
         return {"probability": input_data[1], "label": label, "status": "OK"}
 
     def compute_prediction(self, input_data):
@@ -48,4 +54,3 @@ class RandomForestClassifier:
             return {"status": "Error", "message": str(e)}
 
         return prediction
-
