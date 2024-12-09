@@ -1,12 +1,11 @@
-# file backend/server/apps/ml/student_classifier/linear_reg.py
 import joblib
 import pandas as pd
 
-class LinearRegression:
+class RandomForest:
     def __init__(self):
         path_to_artifacts = "../../research/"
         self.encoders = joblib.load(path_to_artifacts + "encoders_lin2.joblib")
-        self.model = joblib.load(path_to_artifacts + "linear_reg2.joblib")
+        self.model = joblib.load(path_to_artifacts + "studentrf.joblib")
 
     def preprocessing(self, input_data):
         # JSON to pandas DataFrame

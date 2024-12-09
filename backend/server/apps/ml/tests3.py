@@ -1,11 +1,10 @@
 from django.test import TestCase
 
-from apps.ml.student_classifier.linear_reg import LinearRegression
+from apps.ml.student_classifier.random_forest import RandomForest
 import inspect
-from apps.ml.registry import MLRegistry
 
 class MLTests(TestCase):
-    def test_linreg_algorithm(self):
+    def test_rf_algorithm(self):
         input_data = {
             "school": "GP",
             "sex": "F",
@@ -41,7 +40,8 @@ class MLTests(TestCase):
             "G2": 6,
     
         }
-        my_alg = LinearRegression()
+        my_alg = RandomForest()
+        print(input_data)
         response = my_alg.compute_prediction(input_data)
         print(response)
         self.assertEqual('OK', response['status'])

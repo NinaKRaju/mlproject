@@ -27,7 +27,6 @@ class MLTests(TestCase):
         self.assertTrue('label' in response)
         self.assertEqual('<=50K', response['label'])
 
-    print(input_data)
     def test_registry(self):
         registry = MLRegistry()
         self.assertEqual(len(registry.endpoints), 0)
