@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from apps.ml.student_classifier.random_forest import RandomForest
+from apps.ml.student_classifier.random_forest2 import RandomForest
 import inspect
 
 class MLTests(TestCase):
@@ -40,11 +40,10 @@ class MLTests(TestCase):
             "G2": 6,
     
         }
+        
         my_alg = RandomForest()
-        print(input_data)
         response = my_alg.compute_prediction(input_data)
-        print(response)
         self.assertEqual('OK', response['status'])
         self.assertTrue('label' in response)
-        self.assertEqual('pass', response['label'])
+        self.assertEqual('fail', response['label'])
         

@@ -22,7 +22,9 @@ class MLTests(TestCase):
             "native-country": "United-States"
         }
         my_alg = RandomForestClassifier()
+        print(input_data)
         response = my_alg.compute_prediction(input_data)
+        print(response)
         self.assertEqual('OK', response['status'])
         self.assertTrue('label' in response)
         self.assertEqual('<=50K', response['label'])

@@ -37,17 +37,18 @@ class RandomForest:
 
     def predict(self, input_data):
         return self.model.predict(input_data)
+        
 
     def postprocessing(self, input_data):
         label = "fail"
-        if input_data[1] > 13:
+        if input_data > 13:
             label = "pass"
-        return {"probability": input_data[1], "label": label, "status": "OK"}
+        return {"prediction": input_data, "label": label, "status": "OK"}
 
     def compute_prediction(self, input_data):
         try:
             input_data = self.preprocessing(input_data)
-            prediction = self.predict(input_data)[0]  # only one sample
+            prediction = self.predict(input_data)  # only one sample
             prediction = self.postprocessing(prediction)
         except Exception as e:
             return {"status": "Error", "message": str(e), "prediction": self.predict(input_data)[0]}
